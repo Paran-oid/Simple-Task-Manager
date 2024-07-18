@@ -1,14 +1,12 @@
 <div class="container">
   <div class="display-tasks">
-    <h1 class="title">Today</h1>
+    <div class="title">
+      <h1>{{ title }}</h1>
+    </div>
     <div class="main">
       <div class="pending-tasks">
-        <div *ngFor="let task of tasks" class="task-element">
-          <div
-            class="task-element-input"
-            *ngIf="task.status === 'Ongoing'"
-            [matContextMenuTriggerFor]="menu"
-          >
+        <div *ngFor="let task of pendingTasks" class="task-element">
+          <div class="task-element-input" [matContextMenuTriggerFor]="menu">
             <label for="task">
               <input
                 name="task"
@@ -25,23 +23,18 @@
           </mat-menu>
         </div>
       </div>
-      <div class="completed-tasks">
+      <div class="completed-tasks" *ngIf="CheckNumberCompletedTasks()">
         <div class="subtitle" (click)="OnToggleTasks()">
-          <mat-icon [class.rotated]="hiddenTasks">arrow_drop_down</mat-icon>
-          <h4>Completed Tasks</h4>
+          <mat-icon [class.rotated]="!hiddenTasks">arrow_drop_down</mat-icon>
+          <p>Completed Tasks ({{ completedTasks.length }})</p>
         </div>
-        <div class="tasks" *ngIf="hiddenTasks === true">
-          <div *ngFor="let task of tasks" class="task-element">
-            <div
-              class="task-element-input"
-              *ngIf="task.status === 'Completed'"
-              [matContextMenuTriggerFor]="menu"
-            >
+        <div class="tasks" *ngIf="hiddenTasks === false">
+          <div *ngFor="let task of completedTasks" class="task-element">
+            <div class="task-element-input" [matContextMenuTriggerFor]="menu">
               <label for="task">
                 <input
                   name="task"
                   type="checkbox"
-                  class="task-input"
                   checked
                   (change)="ToggleTask($event)"
                   [value]="task.id"
@@ -59,21 +52,5 @@
       </div>
     </div>
   </div>
-  <div class="create-form">
-    <form [formGroup]="form" (submit)="OnAdd()">
-      <mat-form-field subscriptSizing="dynamic" class="task-input">
-        <input
-          type="text"
-          matInput
-          formControlName="task"
-          placeholder="new Task"
-        />
-      </mat-form-field>
-      <button>
-        <span class="icon-container">
-          <mat-icon>add</mat-icon>
-        </span>
-      </button>
-    </form>
-  </div>
 </div>
+<app-createtask (addEvent)="OnAdd()"></app-createtask>

@@ -1,0 +1,38 @@
+/* create-task section */
+
+.create-form {
+  position: fixed;
+  bottom: 0;
+
+  width: 79%;
+  margin-left: 20px;
+
+  overflow: hidden;
+}
+
+.create-form form {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.create-form button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.task-input {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-container {
+  text-align: center;
+}

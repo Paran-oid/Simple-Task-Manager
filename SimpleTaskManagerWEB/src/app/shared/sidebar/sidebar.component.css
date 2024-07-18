@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-.title {
+.username {
   cursor: pointer;
 }
 
@@ -53,12 +53,24 @@ ul {
 }
 
 .mini-title {
-  margin: 20px 0px 0px 5px;
+  margin: 20px 0px 10px 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-title mat-icon {
+  transform: rotate(180deg);
+  transition: all 100ms linear;
+  cursor: pointer;
+}
+
+.mini-title mat-icon.rotated {
+  transform: rotate(0deg);
 }
 
 li {
-  margin-bottom: 5px;
-
   display: flex;
   justify-content: start;
   align-items: center;

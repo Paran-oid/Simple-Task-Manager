@@ -1,0 +1,18 @@
+<div class="create-form">
+  <form [formGroup]="form" (submit)="OnAdd()">
+    <mat-form-field subscriptSizing="dynamic" class="task-input">
+      <input
+        autocomplete="off"
+        type="text"
+        matInput
+        formControlName="task"
+        placeholder="new Task"
+      />
+    </mat-form-field>
+    <button>
+      <span class="icon-container">
+        <mat-icon>add</mat-icon>
+      </span>
+    </button>
+  </form>
+</div>

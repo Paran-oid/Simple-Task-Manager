@@ -4,7 +4,7 @@
       <img src="me 4.jpg" alt="user-img" />
     </div>
     <div>
-      <h4 class="title">Aziz</h4>
+      <h4 class="username">Aziz</h4>
       <div class="user-status">
         <mat-icon style="color: green">circle</mat-icon>
         <p>Online</p>
@@ -14,17 +14,26 @@
   <ul>
     <div class="mini-title">
       <p><b>Scheduled</b></p>
-      <mat-icon>down</mat-icon>
+      <mat-icon
+        (click)="ToggleList($event)"
+        id="1"
+        [class.rotated]="hiddenList1"
+        >arrow_drop_down</mat-icon
+      >
     </div>
-    <li><mat-icon>today</mat-icon>Today</li>
-    <li><mat-icon>date_range</mat-icon>Upcoming</li>
-    <div class="mini-title">
-      <p><b class="mini-title">Tasks</b></p>
-      <mat-icon>down</mat-icon>
+    <div [hidden]="hiddenList1">
+      <li routerLink="Today"><mat-icon>today</mat-icon>Today</li>
+      <li routerLink="Planned"><mat-icon>date_range</mat-icon>Planned</li>
     </div>
-    <li><mat-icon>menu</mat-icon>All</li>
-    <li><mat-icon>done</mat-icon>Completed</li>
-    <li><mat-icon>delete</mat-icon>Deleted</li>
+    <div class="mini-title" (click)="ToggleList($event)">
+      <p><b>Tasks</b></p>
+      <mat-icon id="2" [class.rotated]="hiddenList2">arrow_drop_down</mat-icon>
+    </div>
+    <div [hidden]="hiddenList2">
+      <li routerLink="All"><mat-icon>menu</mat-icon>All</li>
+      <li routerLink="Important"><mat-icon>star</mat-icon>Important</li>
+      <li routerLink="Completed"><mat-icon>done</mat-icon>Completed</li>
+    </div>
   </ul>
   <ul class="user-settings">
     <li>Settings</li>

@@ -1,8 +1,9 @@
 /* General styling */
 
 .container {
-  margin-top: 15px;
   height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .display-tasks {
@@ -10,11 +11,18 @@
 }
 
 .title {
-  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+
+  padding: 10px;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 90%;
 }
 
 .main {
   margin-left: 10px;
+  margin-bottom: 75px;
 }
 
 /* Taks-Grouping */
@@ -28,8 +36,13 @@
   width: 90%;
   background-color: rgb(199, 219, 230);
 
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 2px;
+  border-radius: 5px;
+}
+
+.task-element-input:hover {
+  background-color: rgb(200, 224, 236);
 }
 
 .task-input + label {
@@ -49,13 +62,28 @@
   border-radius: 50%;
   vertical-align: middle;
   border: 1px solid black;
+
+  margin-right: 10px;
 }
 
-.task-input:checked {
-  background-color: red;
+.task-element-input label input:hover {
+  background-color: rgb(178, 197, 207);
+}
+
+.task-element-input label input:checked {
+  outline: none;
+  border: none;
+  background-color: rgb(129, 145, 154);
+  background-image: url("/icons/tick.png");
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Hiding tasks with dropdown icon */
+.completed-tasks .tasks {
+  min-height: 100px;
+}
 
 .subtitle {
   display: flex;
@@ -63,6 +91,8 @@
   align-items: center;
 
   cursor: pointer;
+
+  margin: 10px 0px;
 }
 
 .subtitle mat-icon {
@@ -84,40 +114,4 @@
 .task-input:checked + span {
   text-decoration: line-through;
   color: gray;
-}
-
-/* create-task section */
-
-.create-form {
-  position: fixed;
-  bottom: 0px;
-
-  width: 100%;
-}
-
-.create-form form {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.create-form button {
-  position: absolute;
-  right: 12%;
-  top: 50%;
-
-  background-color: transparent;
-  border: none;
-
-  cursor: pointer;
-  transform: translateY(-50%);
-}
-
-.task-input {
-  width: 100%;
-  height: 100%;
-}
-
-.icon-container {
-  text-align: center;
 }
