@@ -1,0 +1,123 @@
+/* General styling */
+
+.container {
+  margin-top: 15px;
+  height: 100vh;
+}
+
+.display-tasks {
+  margin-left: 10px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.main {
+  margin-left: 10px;
+}
+
+/* Taks-Grouping */
+.task-element {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.task-element-input {
+  width: 90%;
+  background-color: rgb(199, 219, 230);
+
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.task-input + label {
+  display: inline-block;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.task-element-input label input {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+.task-input:checked {
+  background-color: red;
+}
+
+/* Hiding tasks with dropdown icon */
+
+.subtitle {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.subtitle mat-icon {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  transform: rotate(-90deg);
+}
+
+.subtitle mat-icon.rotated {
+  transform: rotate(0deg);
+}
+
+/* For line-through for completed tasks */
+
+.task-input {
+  margin-right: 10px;
+}
+
+.task-input:checked + span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* create-task section */
+
+.create-form {
+  position: fixed;
+  bottom: 0px;
+
+  width: 100%;
+}
+
+.create-form form {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.create-form button {
+  position: absolute;
+  right: 12%;
+  top: 50%;
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.task-input {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-container {
+  text-align: center;
+}

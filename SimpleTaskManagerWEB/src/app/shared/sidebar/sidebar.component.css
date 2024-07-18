@@ -1,0 +1,76 @@
+.sidenav {
+  position: relative;
+
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: 100px 12fr 1fr;
+
+  background-color: rgb(181, 190, 198);
+  overflow: hidden;
+}
+
+.user-info {
+  margin-top: 25px;
+  margin-left: 5px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.title {
+  cursor: pointer;
+}
+
+.user-img {
+  width: 3rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-img img {
+  object-fit: cover;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.user-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-status mat-icon {
+  height: auto;
+  font-size: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+.mini-title {
+  margin: 20px 0px 0px 5px;
+}
+
+li {
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  cursor: pointer;
+  transition: all 0.5s linear;
+
+  width: 100%;
+  padding: 5px 10px 10px 10px;
+}
+
+li:hover {
+  background-color: rgb(54, 70, 82);
+  color: white;
+}

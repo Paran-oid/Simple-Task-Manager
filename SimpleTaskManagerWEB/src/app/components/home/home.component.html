@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="display-tasks">
+    <h1 class="title">Today</h1>
+    <div class="main">
+      <div class="pending-tasks">
+        <div *ngFor="let task of tasks" class="task-element">
+          <div
+            class="task-element-input"
+            *ngIf="task.status === 'Ongoing'"
+            [matContextMenuTriggerFor]="menu"
+          >
+            <label for="task">
+              <input
+                name="task"
+                type="checkbox"
+                (change)="ToggleTask($event)"
+                [value]="task.id"
+              />
+              <span>{{ task.title }}</span>
+            </label>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Edit</button>
+            <button mat-menu-item (click)="OnDelete(task.id)">Delete</button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="completed-tasks">
+        <div class="subtitle" (click)="OnToggleTasks()">
+          <mat-icon [class.rotated]="hiddenTasks">arrow_drop_down</mat-icon>
+          <h4>Completed Tasks</h4>
+        </div>
+        <div class="tasks" *ngIf="hiddenTasks === true">
+          <div *ngFor="let task of tasks" class="task-element">
+            <div
+              class="task-element-input"
+              *ngIf="task.status === 'Completed'"
+              [matContextMenuTriggerFor]="menu"
+            >
+              <label for="task">
+                <input
+                  name="task"
+                  type="checkbox"
+                  class="task-input"
+                  checked
+                  (change)="ToggleTask($event)"
+                  [value]="task.id"
+                />
+                <span>{{ task.title }}</span>
+              </label>
+            </div>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Edit</button>
+              <button mat-menu-item (click)="OnDelete(task.id)">Delete</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="create-form">
+    <form [formGroup]="form" (submit)="OnAdd()">
+      <mat-form-field subscriptSizing="dynamic" class="task-input">
+        <input
+          type="text"
+          matInput
+          formControlName="task"
+          placeholder="new Task"
+        />
+      </mat-form-field>
+      <button>
+        <span class="icon-container">
+          <mat-icon>add</mat-icon>
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
