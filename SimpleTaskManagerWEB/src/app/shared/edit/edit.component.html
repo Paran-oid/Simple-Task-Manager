@@ -1,0 +1,30 @@
+<div class="edit-container" #container>
+  <form method="post">
+    <p class="form-title">Edit task</p>
+    <input type="hidden" value="{{ task?.id }}" />
+    <div class="title">
+      <input
+        name="task"
+        type="checkbox"
+        class="checkbox-input"
+        (change)="ToggleTask($event)"
+        [value]="task?.id"
+        [checked]="task?.status === 'Completed'"
+      />
+      <input type="text" value="{{ task?.title }}" class="title-input" />
+
+      <mat-icon>star</mat-icon>
+    </div>
+    <div class="description">
+      <textarea
+        appIncreaseHeightInput
+        class="description-input"
+        placeholder="{{
+          task?.description && task?.description?.trim() !== ''
+            ? task?.description
+            : 'Add note'
+        }}"
+      ></textarea>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,8 +11,9 @@ import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { MatContextMenuTrigger } from '../../directives/MatContextMenuTrigger.directive';
-import { CreatetaskComponent } from '../../shared/createtask/createtask.component';
+import { CreatetaskComponent } from '../createtask/createtask.component';
 import { ToastrService } from 'ngx-toastr';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-body',
@@ -27,14 +28,17 @@ import { ToastrService } from 'ngx-toastr';
     MatMenuModule,
     MatContextMenuTrigger,
     CreatetaskComponent,
+    EditComponent,
   ],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css',
 })
 export class BodyComponent {
-  title: string = 'Today';
+  @Input() title: string = '';
+  selectedTaskID!: number;
 
   hiddenTasks: boolean = true;
+  hiddenEdit: boolean = true;
 
   pendingTasks: Task[] = [];
   completedTasks: Task[] = [];
@@ -47,6 +51,23 @@ export class BodyComponent {
   ) {}
 
   ngOnInit(): void {
+    this.LoadTasks();
+  }
+
+  OnToggleTasks() {
+    this.hiddenTasks = !this.hiddenTasks;
+  }
+
+  OnToggleEdit(ID: number) {
+    if (this.hiddenEdit === true) {
+      this.hiddenEdit = !this.hiddenEdit;
+      this.selectedTaskID = ID;
+    } else {
+      this.selectedTaskID = ID;
+    }
+  }
+
+  LoadTasks() {
     this.taskService.GetAll().subscribe({
       next: (response) => {
         this.tasks = response;
@@ -59,10 +80,6 @@ export class BodyComponent {
         console.log(error);
       },
     });
-  }
-
-  OnToggleTasks() {
-    this.hiddenTasks = !this.hiddenTasks;
   }
 
   CheckNumberCompletedTasks() {

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { MatContextMenuTrigger } from '../../directives/MatContextMenuTrigger.directive';
 import { CreatetaskComponent } from '../../shared/createtask/createtask.component';
 import { ToastrService } from 'ngx-toastr';
-import { BodyComponent } from '../body/body.component';
+import { BodyComponent } from '../../shared/body/body.component';
 
 @Component({
   selector: 'app-today',

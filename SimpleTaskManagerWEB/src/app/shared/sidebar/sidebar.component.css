@@ -58,6 +58,15 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.mini-title p {
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .mini-title mat-icon {

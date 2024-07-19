@@ -4,6 +4,7 @@ import { CompletedComponent } from './components/completed/completed.component';
 import { AllComponent } from './components/all/all.component';
 import { ImportantComponent } from './components/important/important.component';
 import { PlannedComponent } from './components/planned/planned.component';
+import { EditComponent } from './shared/edit/edit.component';
 
 export const routes: Routes = [
   { path: '', component: TodayComponent },

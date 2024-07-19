@@ -1,10 +1,10 @@
 /* create-task section */
 
 .create-form {
-  position: fixed;
+  position: sticky;
   bottom: 0;
 
-  width: 79%;
+  width: 87%;
   margin-left: 20px;
 
   overflow: hidden;

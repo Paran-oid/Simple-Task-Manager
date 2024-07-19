@@ -12,21 +12,16 @@
     </div>
   </div>
   <ul>
-    <div class="mini-title">
-      <p><b>Scheduled</b></p>
-      <mat-icon
-        (click)="ToggleList($event)"
-        id="1"
-        [class.rotated]="hiddenList1"
-        >arrow_drop_down</mat-icon
-      >
+    <div class="mini-title" id="1" (click)="ToggleList($event)">
+      <p id="1">Scheduled</p>
+      <mat-icon id="1" [class.rotated]="hiddenList1">arrow_drop_down</mat-icon>
     </div>
     <div [hidden]="hiddenList1">
       <li routerLink="Today"><mat-icon>today</mat-icon>Today</li>
       <li routerLink="Planned"><mat-icon>date_range</mat-icon>Planned</li>
     </div>
-    <div class="mini-title" (click)="ToggleList($event)">
-      <p><b>Tasks</b></p>
+    <div class="mini-title" (click)="ToggleList($event)" id="2">
+      <p id="2">Tasks</p>
       <mat-icon id="2" [class.rotated]="hiddenList2">arrow_drop_down</mat-icon>
     </div>
     <div [hidden]="hiddenList2">
