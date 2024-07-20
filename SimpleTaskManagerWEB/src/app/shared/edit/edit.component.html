@@ -1,6 +1,9 @@
 <div class="edit-container" #container>
   <form [formGroup]="form" method="post">
-    <p class="form-title">Edit task</p>
+    <div class="main-title">
+      <p class="form-title">Edit task</p>
+      <mat-icon (click)="HidePanel()">close</mat-icon>
+    </div>
     <input type="hidden" value="{{ taskID }}" formControlName="id" />
     <div class="title">
       <input
@@ -13,9 +16,9 @@
       />
       <input
         type="text"
-        value="{{ task?.title }}"
         class="title-input"
         formControlName="title"
+        [value]="task?.title"
       />
 
       <mat-icon>star</mat-icon>
@@ -28,5 +31,14 @@
         formControlName="description"
         [value]="task?.description"></textarea>
     </div>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="OnClickPut($event)"
+      class="submit-button"
+    >
+      Save
+    </button>
   </form>
 </div>

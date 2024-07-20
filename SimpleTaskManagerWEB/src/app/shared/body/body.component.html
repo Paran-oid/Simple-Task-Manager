@@ -73,6 +73,7 @@
   </div>
   <app-edit
     (loadEvents)="LoadTasks()"
+    (hidePanel)="OnToggleEdit()"
     [taskID]="selectedTaskID"
     [hidden]="hiddenEdit"
     [events]="editEvent.asObservable()"

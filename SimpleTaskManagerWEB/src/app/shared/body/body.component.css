@@ -35,6 +35,8 @@
   display: flex;
   justify-content: start;
   align-items: center;
+
+  user-select: none;
 }
 
 .task-element-input {

@@ -1,4 +1,15 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,7 +45,7 @@ import { Subject } from 'rxjs';
   templateUrl: './body.component.html',
   styleUrl: './body.component.css',
 })
-export class BodyComponent {
+export class BodyComponent implements OnInit {
   @Input() title: string = '';
   selectedTaskID!: number;
 
@@ -61,12 +72,13 @@ export class BodyComponent {
     this.hiddenTasks = !this.hiddenTasks;
   }
 
-  OnToggleEdit(ID: number) {
-    if (this.hiddenEdit === true) {
+  OnToggleEdit(ID?: number) {
+    if (ID != this.selectedTaskID && ID) {
+      this.selectedTaskID = ID;
+    } else if (ID === this.selectedTaskID) {
       this.hiddenEdit = !this.hiddenEdit;
-      this.selectedTaskID = ID;
     } else {
-      this.selectedTaskID = ID;
+      this.hiddenEdit = true;
     }
   }
 

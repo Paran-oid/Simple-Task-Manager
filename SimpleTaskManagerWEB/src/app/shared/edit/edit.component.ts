@@ -24,6 +24,7 @@ import {
 import { IncreaseHeightInputDirective } from '../../directives/increase-height-input.directive';
 import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit',
@@ -35,6 +36,7 @@ import { ToastrService } from 'ngx-toastr';
     FormsModule,
     IncreaseHeightInputDirective,
     ReactiveFormsModule,
+    MatButtonModule,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css',
@@ -46,6 +48,7 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
 
   @Output() loadEvents = new EventEmitter();
+  @Output() hidePanel = new EventEmitter();
   constructor(
     private taskService: TaskService,
     private fb: FormBuilder,
@@ -60,7 +63,7 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
 
     this.form = this.fb.group({
       id: [''],
-      title: [],
+      title: [''],
       description: [
         this.task?.description && this.task?.description?.trim() !== ''
           ? this.task?.description
@@ -95,10 +98,16 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
   EmitChanges() {
     this.loadEvents.emit();
   }
+
+  HidePanel() {
+    this.hidePanel.emit();
+  }
   loadTask() {
     this.taskService.Get(this.taskID).subscribe({
       next: (response) => {
         this.task = response;
+        this.form.patchValue({ title: this.task?.title });
+        this.form.patchValue({ description: this.task?.description });
       },
       error: (error) => {
         console.log(error);
@@ -131,20 +140,24 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  @HostListener('keydown', ['$event']) OnPut(event: KeyboardEvent) {
-    if (event.key == 'Enter') {
-      console.log(this.form.value);
-
-      // this.taskService.Put(this.id?.value, this.form.value).subscribe({
-      //   next: (response) => {
-      //     console.log(response);
-      //     this.toastr.info('Modified', 'Model updated');
-      //     this.EmitChanges();
-      //   },
-      //   error: (error) => {
-      //     console.log(error);
-      //   },
-      // });
+  @HostListener('keydown', ['$event']) OnEnterPut(event?: KeyboardEvent) {
+    if (event?.key == 'Enter') {
+      this.Put();
     }
+  }
+
+  @HostListener('click', ['$event']) OnClickPut(event: Event) {
+    this.Put();
+  }
+
+  Put() {
+    this.taskService.Put(this.id?.value, this.form.value).subscribe({
+      next: (response) => {
+        this.EmitChanges();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }
