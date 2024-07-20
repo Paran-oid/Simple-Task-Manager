@@ -1,7 +1,7 @@
 <div class="edit-container" #container>
-  <form method="post">
+  <form [formGroup]="form" method="post">
     <p class="form-title">Edit task</p>
-    <input type="hidden" value="{{ task?.id }}" />
+    <input type="hidden" value="{{ taskID }}" formControlName="id" />
     <div class="title">
       <input
         name="task"
@@ -11,20 +11,22 @@
         [value]="task?.id"
         [checked]="task?.status === 'Completed'"
       />
-      <input type="text" value="{{ task?.title }}" class="title-input" />
+      <input
+        type="text"
+        value="{{ task?.title }}"
+        class="title-input"
+        formControlName="title"
+      />
 
       <mat-icon>star</mat-icon>
     </div>
     <div class="description">
+      <!-- prettier-ignore -->
       <textarea
         appIncreaseHeightInput
         class="description-input"
-        placeholder="{{
-          task?.description && task?.description?.trim() !== ''
-            ? task?.description
-            : 'Add note'
-        }}"
-      ></textarea>
+        formControlName="description"
+        [value]="task?.description"></textarea>
     </div>
   </form>
 </div>

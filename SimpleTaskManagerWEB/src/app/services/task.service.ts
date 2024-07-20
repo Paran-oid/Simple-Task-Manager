@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { CreateTaskDTO, Task } from '../models/task.model';
+import { CreateTaskDTO, Task, TaskDTO } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,10 @@ export class TaskService {
 
   Post(model: CreateTaskDTO) {
     return this.http.post<Task>(this.url + 'Task/Post', model);
+  }
+
+  Put(ID: number, model: TaskDTO) {
+    return this.http.put<Task>(this.url + 'Task/Put/' + ID, model);
   }
 
   ToggleTask(ID: number, status: string) {

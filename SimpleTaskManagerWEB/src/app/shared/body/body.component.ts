@@ -14,6 +14,7 @@ import { MatContextMenuTrigger } from '../../directives/MatContextMenuTrigger.di
 import { CreatetaskComponent } from '../createtask/createtask.component';
 import { ToastrService } from 'ngx-toastr';
 import { EditComponent } from '../edit/edit.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-body',
@@ -43,6 +44,8 @@ export class BodyComponent {
   pendingTasks: Task[] = [];
   completedTasks: Task[] = [];
   tasks: Task[] = [];
+
+  editEvent: Subject<void> = new Subject();
 
   constructor(
     private taskService: TaskService,
@@ -82,6 +85,10 @@ export class BodyComponent {
     });
   }
 
+  emitEventToEdit() {
+    this.editEvent.next();
+  }
+
   CheckNumberCompletedTasks() {
     for (let task of this.tasks) {
       if (task.status === 'Completed') {
@@ -92,7 +99,7 @@ export class BodyComponent {
   }
 
   OnAdd() {
-    this.ngOnInit();
+    this.LoadTasks();
   }
 
   ToggleTask(event: Event) {
@@ -106,7 +113,8 @@ export class BodyComponent {
 
         this.taskService.ToggleTask(task.id, status).subscribe({
           next: (response) => {
-            this.ngOnInit();
+            this.LoadTasks();
+            this.emitEventToEdit();
           },
           error: (error) => {
             console.log(error);
@@ -123,7 +131,7 @@ export class BodyComponent {
     if (ID != 0 && ID != null) {
       this.taskService.Delete(ID).subscribe({
         next: (response) => {
-          this.ngOnInit();
+          this.LoadTasks();
           this.toastr.error('task deleted successfully', 'Done');
         },
         error: (error) => {
