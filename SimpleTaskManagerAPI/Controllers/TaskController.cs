@@ -41,6 +41,18 @@ namespace SimpleTaskManagerAPI.Controllers
             return Ok(task);
         }
 
+        [HttpGet("{ID}")]
+        public async Task<ActionResult<AppTask?>> TaskImportanceToggle([FromRoute] int ID)
+        {
+            var task = await _taskService.TaskImportanceToggle(ID);
+            if (task == null)
+            {
+                return NotFound("Tasj wasn't foundd");
+            }
+
+            return Ok(task);
+        }
+
         [HttpPost]
         public async Task<ActionResult<AppTask>> Post([FromBody] CreateAppTaskDTO model)
         {

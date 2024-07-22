@@ -25,6 +25,7 @@ import { IncreaseHeightInputDirective } from '../../directives/increase-height-i
 import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-edit',
@@ -140,13 +141,19 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  @HostListener('keydown', ['$event']) OnEnterPut(event?: KeyboardEvent) {
-    if (event?.key == 'Enter') {
+  @HostListener('document:keydown', ['$event']) OnEnterPut(
+    event?: KeyboardEvent
+  ) {
+    if (
+      event?.key == 'Enter' &&
+      !(event.target instanceof HTMLTextAreaElement) &&
+      !(event.target instanceof HTMLInputElement)
+    ) {
       this.Put();
     }
   }
 
-  @HostListener('click', ['$event']) OnClickPut(event: Event) {
+  OnClickPut(event: Event) {
     this.Put();
   }
 
@@ -154,9 +161,19 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
     this.taskService.Put(this.id?.value, this.form.value).subscribe({
       next: (response) => {
         this.EmitChanges();
+        this.toastr.info('Changes saved', 'Everything has been saved!');
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  ToggleImportantTask() {
+    this.taskService.ToggleTaskImportance(this.taskID).subscribe({
+      next: (response) => {
+        this.loadTask();
+        this.EmitChanges();
       },
     });
   }

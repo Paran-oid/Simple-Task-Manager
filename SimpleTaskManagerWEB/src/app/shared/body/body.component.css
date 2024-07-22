@@ -41,11 +41,24 @@
 
 .task-element-input {
   width: 90%;
-  background-color: rgb(199, 219, 230);
+  background-color: rgb(158, 197, 217);
 
   padding: 15px;
   margin-bottom: 2px;
   border-radius: 5px;
+
+  position: relative;
+}
+
+.task-element-input {
+  width: 90%;
+  background-color: rgb(158, 197, 217);
+
+  padding: 15px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+
+  position: relative;
 }
 
 .task-element-input:hover {
@@ -85,6 +98,22 @@
   background-size: 16px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.star-img {
+  width: 2rem;
+  cursor: pointer;
+
+  position: absolute;
+  right: 0px;
+  bottom: 50%;
+
+  transform: translateY(50%);
+}
+
+.star-img img {
+  object-fit: cover;
+  width: 2rem;
 }
 
 /* Hiding tasks with dropdown icon */

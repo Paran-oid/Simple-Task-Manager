@@ -26,6 +26,7 @@ import { CreatetaskComponent } from '../createtask/createtask.component';
 import { ToastrService } from 'ngx-toastr';
 import { EditComponent } from '../edit/edit.component';
 import { Subject } from 'rxjs';
+import { TaskFilter } from '../../pipes/filterTasks.pipe';
 
 @Component({
   selector: 'app-body',
@@ -41,12 +42,14 @@ import { Subject } from 'rxjs';
     MatContextMenuTrigger,
     CreatetaskComponent,
     EditComponent,
+    TaskFilter,
   ],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css',
 })
 export class BodyComponent implements OnInit {
   @Input() title: string = '';
+  @Input() filter: string = '';
   selectedTaskID!: number;
 
   hiddenTasks: boolean = true;
@@ -61,10 +64,15 @@ export class BodyComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private taskFilter: TaskFilter
   ) {}
 
   ngOnInit(): void {
+    if (this.filter === 'Completed') {
+      this.hiddenTasks = false;
+    }
+
     this.LoadTasks();
   }
 
@@ -89,6 +97,15 @@ export class BodyComponent implements OnInit {
         this.pendingTasks = this.tasks.filter((t) => t.status === 'Ongoing');
         this.completedTasks = this.tasks.filter(
           (t) => t.status === 'Completed'
+        );
+
+        this.pendingTasks = this.taskFilter.transform(
+          this.pendingTasks,
+          this.filter
+        );
+        this.completedTasks = this.taskFilter.transform(
+          this.completedTasks,
+          this.filter
         );
       },
       error: (error) => {
@@ -135,6 +152,17 @@ export class BodyComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  ToggleImportantTask(event: Event, ID: number) {
+    event.stopPropagation();
+
+    this.taskService.ToggleTaskImportance(ID).subscribe({
+      next: (response) => {
+        this.LoadTasks();
+        this.emitEventToEdit();
       },
     });
   }

@@ -3,6 +3,7 @@ export interface Task {
   title: string;
   description?: string;
   status: string;
+  important: boolean;
 }
 
 export interface TaskDTO {

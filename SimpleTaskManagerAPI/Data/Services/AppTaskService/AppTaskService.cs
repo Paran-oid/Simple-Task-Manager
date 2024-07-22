@@ -68,6 +68,21 @@ namespace SimpleTaskManagerAPI.Data.Services.TaskService
             return task;
         }
 
+        public async Task<AppTask?> TaskImportanceToggle(int ID)
+        {
+            var task = await _context.Tasks.FirstOrDefaultAsync(t => t.ID == ID);
+
+            if (task == null)
+            {
+                return null;
+            }
+
+            task.Important = !task.Important;
+            await _context.SaveChangesAsync();
+
+            return task;
+        }
+
         public async Task<string?> Delete(int ID)
         {
             var task = await _context.Tasks.FirstOrDefaultAsync(t => t.ID == ID);

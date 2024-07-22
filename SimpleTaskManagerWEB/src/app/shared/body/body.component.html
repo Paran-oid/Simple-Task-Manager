@@ -22,6 +22,18 @@
                   />
                   <span>{{ task.title }}</span>
                 </label>
+                <div
+                  class="star-img"
+                  (click)="ToggleImportantTask($event, task.id)"
+                >
+                  <img
+                    src="/icons/star/star-active.png"
+                    *ngIf="task?.important === true; else unimportant"
+                  />
+                  <ng-template #unimportant>
+                    <img src="/icons/star/star-unactive.png" />
+                  </ng-template>
+                </div>
               </div>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>Edit</button>
@@ -55,6 +67,18 @@
                     />
                     <span>{{ task.title }}</span>
                   </label>
+                  <div
+                    class="star-img"
+                    (click)="ToggleImportantTask($event, task.id)"
+                  >
+                    <img
+                      src="/icons/star/star-active.png"
+                      *ngIf="task?.important === true; else unimportant"
+                    />
+                    <ng-template #unimportant>
+                      <img src="/icons/star/star-unactive.png" />
+                    </ng-template>
+                  </div>
                 </div>
 
                 <mat-menu #menu="matMenu">

@@ -26,6 +26,10 @@ export class TaskService {
     return this.http.put<Task>(this.url + 'Task/Put/' + ID, model);
   }
 
+  ToggleTaskImportance(ID: number) {
+    return this.http.get(this.url + 'Task/TaskImportanceToggle/' + ID);
+  }
+
   ToggleTask(ID: number, status: string) {
     const httpOptions = { headers: { 'Content-Type': 'application/json' } };
     return this.http.put(

@@ -5,6 +5,8 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { TaskFilter } from './pipes/filterTasks.pipe';
+import { Editor } from 'ngx-editor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideToastr(),
+    TaskFilter,
+    Editor,
   ],
 };

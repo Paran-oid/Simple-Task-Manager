@@ -20,8 +20,15 @@
         formControlName="title"
         [value]="task?.title"
       />
-
-      <mat-icon>star</mat-icon>
+      <div class="star-img" (click)="ToggleImportantTask()">
+        <img
+          src="/icons/star/star-active.png"
+          *ngIf="task?.important === true; else unimportant"
+        />
+        <ng-template #unimportant>
+          <img src="/icons/star/star-unactive.png" />
+        </ng-template>
+      </div>
     </div>
     <div class="description">
       <!-- prettier-ignore -->
@@ -29,6 +36,7 @@
         appIncreaseHeightInput
         class="description-input"
         formControlName="description"
+        matInput
         [value]="task?.description"></textarea>
     </div>
     <button

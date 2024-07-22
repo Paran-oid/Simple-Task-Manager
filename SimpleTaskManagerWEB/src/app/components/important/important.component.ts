@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { BodyComponent } from '../../shared/body/body.component';
 
 @Component({
   selector: 'app-important',
   standalone: true,
-  imports: [],
+  imports: [BodyComponent],
   templateUrl: './important.component.html',
-  styleUrl: './important.component.css'
+  styleUrl: './important.component.css',
 })
-export class ImportantComponent {
-
-}
+export class ImportantComponent {}
