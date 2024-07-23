@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { CreateTaskDTO, Task, TaskDTO } from '../models/task.model';
+import { Task, TaskDTO } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class TaskService {
     return this.http.get<Task>(this.url + 'Task/Get/' + ID);
   }
 
-  Post(model: CreateTaskDTO) {
+  Post(model: TaskDTO) {
     return this.http.post<Task>(this.url + 'Task/Post', model);
   }
 

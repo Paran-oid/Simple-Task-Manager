@@ -73,6 +73,13 @@
   width: 2rem;
 }
 
+/* Calendar */
+
+.calendar {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 /* Checkbox */
 
 .checkbox-input {

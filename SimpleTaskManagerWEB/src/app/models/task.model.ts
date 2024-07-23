@@ -4,17 +4,12 @@ export interface Task {
   description?: string;
   status: string;
   important: boolean;
+  date?: string;
 }
 
 export interface TaskDTO {
   title: string;
   description?: string;
   status: string;
-}
-
-export class CreateTaskDTO {
-  status: string;
-  constructor(public title: string) {
-    this.status = 'Ongoing';
-  }
+  date?: string;
 }

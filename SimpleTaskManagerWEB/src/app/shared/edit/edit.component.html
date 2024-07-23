@@ -30,6 +30,14 @@
         </ng-template>
       </div>
     </div>
+    <mat-form-field class="calendar">
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <div class="description">
       <!-- prettier-ignore -->
       <textarea

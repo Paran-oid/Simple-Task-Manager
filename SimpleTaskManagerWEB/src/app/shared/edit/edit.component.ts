@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  model,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -14,7 +15,7 @@ import { BodyComponent } from '../body/body.component';
 import { MatIcon } from '@angular/material/icon';
 import { TaskService } from '../../services/task.service';
 import { Task, TaskDTO } from '../../models/task.model';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -26,6 +27,10 @@ import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { FixDateFormat } from '../../utilities/FixDateFormat';
 
 @Component({
   selector: 'app-edit',
@@ -38,6 +43,10 @@ import { MatInput, MatInputModule } from '@angular/material/input';
     IncreaseHeightInputDirective,
     ReactiveFormsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatCardModule,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css',
@@ -65,6 +74,7 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
     this.form = this.fb.group({
       id: [''],
       title: [''],
+      date: [''],
       description: [
         this.task?.description && this.task?.description?.trim() !== ''
           ? this.task?.description
@@ -83,6 +93,10 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
 
   get description() {
     return this.form.get('description');
+  }
+
+  get date() {
+    return this.form.get('date');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -141,24 +155,20 @@ export class EditComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  @HostListener('document:keydown', ['$event']) OnEnterPut(
-    event?: KeyboardEvent
-  ) {
-    if (
-      event?.key == 'Enter' &&
-      !(event.target instanceof HTMLTextAreaElement) &&
-      !(event.target instanceof HTMLInputElement)
-    ) {
-      this.Put();
-    }
-  }
-
   OnClickPut(event: Event) {
     this.Put();
   }
 
   Put() {
-    this.taskService.Put(this.id?.value, this.form.value).subscribe({
+    const model: Task = {
+      id: this.id?.value,
+      title: this.title?.value,
+      description: this.description?.value,
+      status: this.task?.status!,
+      important: this.task?.important!,
+      date: FixDateFormat(this.date?.value),
+    };
+    this.taskService.Put(this.id?.value, model).subscribe({
       next: (response) => {
         this.EmitChanges();
         this.toastr.info('Changes saved', 'Everything has been saved!');

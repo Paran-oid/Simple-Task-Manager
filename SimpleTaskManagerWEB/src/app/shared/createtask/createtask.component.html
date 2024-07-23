@@ -9,10 +9,15 @@
         placeholder="new Task"
       />
     </mat-form-field>
-    <button>
-      <span class="icon-container">
-        <mat-icon>add</mat-icon>
-      </span>
-    </button>
+    <span class="icon-container">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </span>
   </form>
 </div>
