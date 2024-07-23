@@ -45,7 +45,7 @@ import { TaskFilter } from '../../pipes/filterTasks.pipe';
     TaskFilter,
   ],
   templateUrl: './body.component.html',
-  styleUrl: './body.component.css',
+  styleUrl: './body.component.scss',
 })
 export class BodyComponent implements OnInit {
   @Input() title: string = '';

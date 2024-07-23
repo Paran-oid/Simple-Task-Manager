@@ -65,7 +65,7 @@
                       (change)="ToggleTask($event)"
                       [value]="task.id"
                     />
-                    <span>{{ task.title }}</span>
+                    <span [ngClass]="'line-through'">{{ task.title }}</span>
                   </label>
                   <div
                     class="star-img"

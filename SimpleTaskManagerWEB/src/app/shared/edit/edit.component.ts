@@ -49,7 +49,7 @@ import { FixDateFormat } from '../../utilities/FixDateFormat';
     MatCardModule,
   ],
   templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css',
+  styleUrl: './edit.component.scss',
   providers: [TaskService],
 })
 export class EditComponent implements OnChanges, OnInit, OnDestroy {

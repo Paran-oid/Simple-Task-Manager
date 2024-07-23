@@ -6,6 +6,6 @@ import { BodyComponent } from '../../shared/body/body.component';
   standalone: true,
   imports: [BodyComponent],
   templateUrl: './scheduled.component.html',
-  styleUrl: './scheduled.component.css',
+  styleUrl: './scheduled.component.scss',
 })
 export class ScheduledComponent {}

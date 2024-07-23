@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [MatIconModule, CommonModule, RouterLink],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
   hiddenList1: boolean = false;

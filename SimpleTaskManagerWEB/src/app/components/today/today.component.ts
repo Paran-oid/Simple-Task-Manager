@@ -31,6 +31,6 @@ import { BodyComponent } from '../../shared/body/body.component';
     BodyComponent,
   ],
   templateUrl: './today.component.html',
-  styleUrl: './today.component.css',
+  styleUrl: './today.component.scss',
 })
 export class TodayComponent {}

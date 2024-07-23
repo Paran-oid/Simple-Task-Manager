@@ -34,7 +34,7 @@ import { FixDateFormat } from '../../utilities/FixDateFormat';
     MatMenuModule,
   ],
   templateUrl: './createtask.component.html',
-  styleUrl: './createtask.component.css',
+  styleUrl: './createtask.component.scss',
 })
 export class CreatetaskComponent implements OnInit {
   form: FormGroup = new FormGroup({});

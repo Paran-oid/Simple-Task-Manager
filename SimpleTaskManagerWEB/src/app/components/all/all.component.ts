@@ -6,6 +6,6 @@ import { BodyComponent } from '../../shared/body/body.component';
   standalone: true,
   imports: [BodyComponent],
   templateUrl: './all.component.html',
-  styleUrl: './all.component.css',
+  styleUrl: './all.component.scss',
 })
 export class AllComponent {}
